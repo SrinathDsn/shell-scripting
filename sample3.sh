@@ -20,3 +20,7 @@ echo Hello World
 
 echo -e "\e[32mMy name is Srinath Domala\e[0m"
 echo "one more line"
+
+echo -e "Line1\n\nLine2"
+
+echo -e "Word1\t\tWord2"
