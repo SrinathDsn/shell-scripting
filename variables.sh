@@ -6,3 +6,8 @@ b=devops
 echo ${a}times
 echo $b
 
+DATE=2022-03-20
+echo Today date is $DATE
+
+DATE=$(date +%F)
+echo Today date is $DATE
