@@ -10,6 +10,7 @@ echo Hello World
 # Blue     34
 # Magenta  35
 # Cyan     36
+#
 
 # Synatx : echo -e "\e[COLmHello\e[0m"
 # -e option is to enable esc seq, without -e colors will not work
