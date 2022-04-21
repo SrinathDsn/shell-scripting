@@ -16,3 +16,8 @@ x=10
 y=20
 ADD=$(($x+$y))
 echo Add = $ADD
+
+c=(10 20 small large)
+echo First value of array = ${c(0)}
+echo Third value of array = ${c(2)}
+echo All values of array = ${c(*)}
