@@ -1,1 +1,1 @@
-echo cart component
+echo Cart Component
