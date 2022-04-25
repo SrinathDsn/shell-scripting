@@ -1,9 +1,9 @@
 #!/bin/bash
 
-source components/common.shipping
+source components/common.sh
 
 
-Print "COnfigure YUM Repo"
+Print "Configure YUM Repo"
 curl -f -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG_FILE}
 StatCheck $?
 
@@ -14,5 +14,3 @@ StatCheck $?
 Print "Start MySQL Service"
 systemctl enable mysqld &>>${LOG_FILE} && systemctl start mysqld &>>${LOG_FILE}
 StatCheck $?
-
-
