@@ -21,7 +21,7 @@ StatCheck $?
 
 
 Print "Download Schema"
-curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
+curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zi" &>>$LOG_FILE
 StatCheck $?
 
 Print "Extract Schema"
