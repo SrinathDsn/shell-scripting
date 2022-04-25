@@ -23,6 +23,7 @@ rm -f $LOG_FILE
 APP_USER=roboshop
 
 NODEJS() {
+
 Print "Configure YUM Repos"
 curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash - &>>${LOG_FILE}
 StatCheck $?
@@ -40,7 +41,7 @@ fi
 
 
 Print "Download App Component"
-curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
+curl -f -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
 StatCheck $?
 
 Print "Cleanup old content"
@@ -60,7 +61,7 @@ chown -R ${APP_USER}:${APP_USER} /home/${APP_USER}
 StatCheck $?
 
 Print " Setup SystemD File"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
 StatCheck $?
 
 Print "Restart ${COMPONENT} Service"
