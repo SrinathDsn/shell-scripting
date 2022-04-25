@@ -10,11 +10,11 @@ StatCheck() {
 }
 
 Print() {
-  echo -e "\e[36m $11 \e[0m"
+  echo -e "\e[36m $1 \e[0m"
 }
 
 USER_ID=$(id -u)
-if [ "$USER_ID" -ne 0]; then
+if [ "$USER_ID" -ne 0 ]; then
   echo You should run your script as sudo or root user
   exit 1
 fi
@@ -27,17 +27,21 @@ Print "Downloading Nginx Content"
 curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 StatCheck $?
 
-Print "Cleanup Old Nginx content and extract new downloaded archive"
-rm -rf /usr/share/nginx/html/*
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
-mv frontend-main/* .
-mv static/* .
-rm -rf frontend-main README.md
+Print "Cleanup Old Nginx content"
+rm -rf /usr/share/nginx/html/*\
+StatCheck $?
+
+cd /usr/share/nginx/html/
+
+Print "Extracting Archive"
+unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
+StatCheck $?
+
+Print "Update roboshop Configruation"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 StatCheck $?
 
 Print "Starting Nginx"
-systemctl restart nginx
+systemctl restart nginx && systemctl enable nginx
 StatCheck $?
-systemctl enable nginx
+
