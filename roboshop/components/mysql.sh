@@ -18,7 +18,7 @@ StatCheck $?
 echo 'show databases' | mysql -uroot -pRoboshop@1 &>>${LOG_FILE}
 if [ $? -ne 0 ]; then
   print "Change Default root password"
-  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Roboshop@1');" >/tmp/rootpass.sql
+  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('RoboShop@1');" >/tmp/rootpass.sql
   DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
   mysql --connect-expired-password -uroot -p"${DEFAULT_ROOT_PASSWORD}" </tmp/rootpass.sql &>>${LOG_FILE}
   StatCheck $?
