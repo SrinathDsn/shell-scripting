@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source components/common.sh
 
 Print "Configure YUM Repos"
