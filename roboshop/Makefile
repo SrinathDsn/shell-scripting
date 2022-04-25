@@ -8,4 +8,4 @@ mongodb:
 	bash components/mongodb.sh
 
 catalogue:
-	bash componenets/catalogue.sh
+	bash components/catalogue.sh
