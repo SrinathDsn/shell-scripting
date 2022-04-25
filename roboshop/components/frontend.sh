@@ -23,7 +23,7 @@ rm -f $LOG_FILE
 
 
 Print "Installing Nginx"
-yum install nginx -y
+yum install nginx -y >>$LOG_FILE
 StatCheck $?
 
 Print "Downloading Nginx Content"
