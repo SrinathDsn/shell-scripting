@@ -17,7 +17,11 @@
 # 1. String Tests
 # Operators : ==, !=, -z
 # 2. Number Tests
+# Operators: -eq, -ne, -le, -lt, -gt, -ge
 # 3. File Tests
+# Operators
+# -e -> to check file exists or not
+# https://tldp.org/LDP/abs/html/fto.html
 
 a="abc"
 if [ "$a" == "abc" ]; then
@@ -31,3 +35,6 @@ fi
 if [ -z "$b" ];then
   echo b variable is empty
 fi
+
+## One observation, I am using quotes for variables. And it is a best practice.
+
