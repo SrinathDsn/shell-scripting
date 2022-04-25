@@ -18,7 +18,7 @@ Print_Message() {
   echo "First Argument in Function = $1"
   }
 
-Print_Message DevOps
+Print_Message abc
 
 echo "First Argument in Main Script = $1"
 
