@@ -22,9 +22,7 @@ Print "Download App Component"
 curl curl -f -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
 StatCheck $?
 
-Print "Cleanup old content"
-rm -rf /home/${APP_USER}/catalogue &>>${LOG_FILE}
-StatCheck $?
+
 
 Print "Extract App Content"
 cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/catalogue.zip &>>${LOG_FILE} && mv catalogue-main catalogue &>>${LOG_FILE}
