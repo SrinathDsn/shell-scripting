@@ -12,7 +12,7 @@
  # fi
 
 # shellcheck disable=SC1073
-if [ 1 -eq 1]
+if [' 1 -eq 1']
 then
   echo Hello
 fi
