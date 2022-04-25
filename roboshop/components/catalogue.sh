@@ -12,7 +12,7 @@ StatCheck $?
 
 
 Print "Add Application user"
-useradd ${APP_USER} &>>${LOG_FILE}
+useradd -o ${APP_USER} &>>${LOG_FILE}
 StatCheck $?
 
 Print "Download App Component"
