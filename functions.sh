@@ -21,14 +21,21 @@ Print_Message() {
   b=20
   }
 
-## Main Program
+STAT() {
+  echo Hello
+  return 1
+  echo Bye
+}
 a=10
 Print_Message abc
 
 echo "First Argument in Main Script = $1"
 echo "value of b = $b"
+STAT
+echo Exit status of function STAT = $?
 
 
 ## Note, function has always been declared first and then you call function later in the code
 # Function weill have its own set of special variables
-
+## Variable declared in main program can be overwritten in function and vice cersa.
+# Function is a command, function have exit status as well
