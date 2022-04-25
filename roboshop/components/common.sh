@@ -104,7 +104,7 @@ SERVICE_SETUP
 PYTHON() {
 
   Print "Install Python"
-  yum install python36 gcc python3-devel -y &>>$(LOG_FILE)
+  yum install python36 gcc python3-devel -y &>>${LOG_FILE}
   StatCheck $?
 
   APP_SETUP
