@@ -15,11 +15,32 @@ Print "Start MySQL Service"
 systemctl enable mysqld &>>${LOG_FILE} && systemctl start mysqld &>>${LOG_FILE}
 StatCheck $?
 
-echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('RoboShop@1');" >/tmp/rootpass.sql
-
-DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-mysql --connect-expired-password -uroot -p"${DEFAULT_ROOT_PASSWORD}" </tmp/rootpass.sql &>>${LOG_FILE}
+echo 'show databases' | mysql -uroot -pRoboshop@1 &>>${LOG_FILE}
+if [ $? -ne 0 ]; then
+  Print "Change Default Root Password"
+  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Roboshop@1');" >/tmp/rootpass.sql
+  DEFAULT_ROOT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
+  mysql --connect-expired-password -uroot -p"${DEFAULT_ROOT_PASSWORD}" </tmp/rootpass.sql &>>${LOG_FILE}
   StatCheck $?
+fi
+
+echo show plugins | mysql -uroot -pRoboshop@1 2>>${LOG_FILE} | grep validate_password &>>${LOG_FILE}
+if [ $? -eq 0 ]; then
+  Print "Uninstall Password Validate Plugin"
+  echo 'uninstall plugin validate_password;' >/tmp/pass-validate.sql
+  mysql --connect-expired-password -uroot -pRoboshop@1 </tmp/pass-validate.sql &>>${LOG_FILE}
+  StatCheck $?
+fi
+
+Print "Download Schema"
+curl -f -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOG_FILE}
+StatCheck $?
+
+Print "Extract Schema"
+cd /tmp && unzip -o mysql.zip &>>${LOG_FILE}
+StatCheck $?
+
+
 
 
 
