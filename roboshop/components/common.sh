@@ -116,3 +116,15 @@ PYTHON() {
   SERVICE_SETUP
 
 }
+
+GOLANG() {
+
+  Print "Install GoLang"
+  yum install golang -y &>>${LOG_FILE}
+  StatCheck $?
+
+  APP_SETUP
+
+  SERVICE_SETUP
+
+}
