@@ -38,11 +38,11 @@ Print "Fix App User Permissions"
 chown -R ${APP_USER}:${APP_USER} /home/${APP_USER}
 StatCheck $?
 
-Print " Setup System File"
-sed -i -e 's/MONGO_DSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>${LOG_FILE} && mv /home/roboshop/catalogue/systemd.service  /etc/systemd/system/catalogue.service &>>${LOG_FILE}
+Print " Setup SystemD File"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>${LOG_FILE} && mv /home/roboshop/catalogue/systemd.service  /etc/systemd/system/catalogue.service &>>${LOG_FILE}
 StatCheck $?
 
 Print "Restart Catalogue Service"
-systemctl daemon-reload &>>${LOG_FILE} && systemctl start catalogue &>>${LOG_FILE} && systemctl enable catalogue &>>${LOG_FILE}
+systemctl daemon-reload &>>${LOG_FILE} && systemctl restart catalogue &>>${LOG_FILE} && systemctl enable catalogue &>>${LOG_FILE}
 StatCheck $?
 
