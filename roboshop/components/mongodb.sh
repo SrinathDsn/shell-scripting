@@ -15,8 +15,20 @@ Print "Update MongoDB listen address"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 StatCheck $?
 
-
 Print "Start Mongodb"
 systemctl enable mongod &>>$LOG_FILE && systemctl start mongod &>>$LOG_FILE
+StatCheck $?
+
+
+Print "Download Schema"
+curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
+StatCheck $?
+
+Print "Extract Schema"
+cd /tmp && unzip mongodb.zip &>>$LOG_FILE
+StatCheck $?
+
+Print "Load Schema"
+cd mongodb-main && mongo < catalogue.js &>>$LOG_FILE && mongo < users.js &>>$LOG_FILE
 StatCheck $?
 
